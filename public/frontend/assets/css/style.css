@@ -1548,6 +1548,10 @@ body {
   background-color: #f8f9fa; /* Ganti warna saat hover */
 }
 
+a.nav__link {
+  cursor: pointer;
+}
+
 
 }
 /*# sourceMappingURL=style.css.map */

@@ -5,14 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Booking extends Model
+class Penginapan extends Model
 {
     use HasFactory;
 
     protected $guarded = ['id'];
 
-    public function penginapan()
-    {
-        return $this->belongsTo(Penginapan::class);
+    public function galeries()
+{
+    return $this->hasMany(Galeri::class, 'penginapan_id');
+
     }
+    
 }

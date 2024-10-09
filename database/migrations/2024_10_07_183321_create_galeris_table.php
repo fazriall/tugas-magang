@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('galleries', function (Blueprint $table) {
+        Schema::create('galeries', function (Blueprint $table) {
             $table->id();
             $table->string('name'); // Name for the gallery
             $table->text('images'); // Location of images
-            $table->foreignId('travel_package_id')->nullable()->constrained()->cascadeOnDelete(); // Foreign key to travel_packages
+            $table->foreignId('penginapan_id')->nullable()->constrained()->cascadeOnDelete(); // Foreign key to travel_packages
             $table->timestamps();
             $table->string('image_path')->nullable(); // Menyimpan path gambar
 
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('galleries');
+        Schema::dropIfExists('galeries');
     }
 };

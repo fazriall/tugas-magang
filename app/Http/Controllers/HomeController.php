@@ -16,8 +16,9 @@ class HomeController extends Controller
     public function index()
     {
         $travel_packages = TravelPackage::with('galleries')->get();
-        
+        $blogs = Blog::get()->take(3);
 
-        return view('homepage', compact('travel_packages'));
-    }
+
+        return view('homepage', compact('travel_packages','blogs'));
+}
 }

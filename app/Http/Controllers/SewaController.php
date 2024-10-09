@@ -5,15 +5,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class TransportasiController extends Controller
+class SewaController extends Controller
 {
     public function index()
     {
-        return view('transportasi.index');
+        return view('sewa.index');
     }
 
     public function transpadang()
     {
-        return view('transportasi.transpadang'); 
+        return view('sewa.index'); 
     }
+    
+    
 }

@@ -7,7 +7,7 @@
             <div class="row mb-2">
                 <div class="col-sm-12 d-flex justify-content-between">
                     <h1 class="m-0">{{ __('Form Edit') }}</h1>
-                    <a href="{{ route('admin.travel_packages.index') }}" class="btn btn-primary"> <i class="fa fa-arrow-left"></i> </a>
+                    <a href="{{ route('admin.penginapans.index') }}" class="btn btn-primary"> <i class="fa fa-arrow-left"></i> </a>
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -20,14 +20,14 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card p-3">
-                        <form method="post" action="{{ isset($travel_package) ? route('admin.travel_packages.galleries.update', [$travel_package, $gallery]) : route('admin.penginapans.galleries.update', [$penginapan, $gallery]) }}" enctype="multipart/form-data">
+                        <form method="post" action="{{ isset($penginapan) ? route('admin.penginapans.galeries.update', [$penginapan, $galeri]) : route('admin.penginapans.galeries.update', [$penginapan, $galeri]) }}" enctype="multipart/form-data">
                             @csrf 
                             @method('put')
 
                             <div class="form-group row border-bottom pb-4">
                                 <label for="name" class="col-sm-2 col-form-label">Name</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="name" value="{{ old('name', $gallery->name) }}" id="name" placeholder="example: {{ isset($travel_package) ? 'Kuta' : 'Hotel XYZ' }}">
+                                    <input type="text" class="form-control" name="name" value="{{ old('name', $galeri->name) }}" id="name" placeholder="example: {{ isset($penginapan) ? 'Kuta' : 'Hotel XYZ' }}">
                                 </div>
                             </div>
 
@@ -35,7 +35,7 @@
                                 <label for="images" class="col-sm-2 col-form-label">Images</label>
                                 <div class="col-sm-10">
                                     <input type="file" class="form-control" name="images" id="images">
-                                    <small>Current image: <img src="{{ asset('storage/' . $gallery->images) }}" alt="{{ $gallery->name }}" style="width: 100px; height: auto;"></small>
+                                    <small>Current image: <img src="{{ asset('storage/' . $galeri->images) }}" alt="{{ $galeri->name }}" style="width: 100px; height: auto;"></small>
                                 </div>
                             </div>
 

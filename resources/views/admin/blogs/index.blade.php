@@ -6,7 +6,8 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12 justify-content-between d-flex">
-                    <h1 class="m-0">{{ __('Booking') }}</h1>
+                    <h1 class="m-0">{{ __('Blog') }}</h1>
+                    <a href="{{ route('admin.blogs.create') }}" class="btn btn-primary btn-sm"> <i class="fa fa-plus"></i> </a>
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -26,25 +27,28 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Number Phone</th>
-                                        <th>Date</th>
-                                        <th>nama tempat</th>
+                                        <th>Title</th>
+                                        <th>Image</th>
+                                        <th>Excerpt</th>
+                                        <th>Category</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($bookings as $booking)
+                                @foreach($blogs as $blog)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $booking->name }}</td>
-                                        <td>{{ $booking->email }}</td>
-                                        <td>{{ $booking->number_phone }}</td>
-                                        <td>{{ $booking->date }}</td>
-                                        <td>{{ $booking->penginapan->location }}</td>
+                                        <td>{{ $blog->title }}</td>
                                         <td>
-                                            <form onclick="return confirm('are you sure ?');" class="d-inline-block" action="{{ route('admin.bookings.destroy', [$booking]) }}" method="post">
+                                            <a href="{{ Storage::url($blog->image) }}" target="_blank">
+                                                <img src="{{ Storage::url($blog->image) }}" width="100" alt="">
+                                            </a>
+                                        </td>
+                                        <td>{{ $blog->excerpt }}</td>
+                                        <td>{{ $blog->category->name }}</td>
+                                        <td>
+                                            <a href="{{ route('admin.blogs.edit', [$blog]) }}" class="btn btn-sm btn-info"> <i class="fa fa-edit"></i> </a>              
+                                            <form onclick="return confirm('are you sure ?');" class="d-inline-block" action="{{ route('admin.blogs.destroy', [$blog]) }}" method="post">
                                                 @csrf 
                                                 @method('delete')
                                                 <button class="btn btn-sm btn-danger"> <i class="fa fa-trash"></i> </button>
@@ -58,7 +62,7 @@
                         <!-- /.card-body -->
 
                         <div class="card-footer clearfix">
-                            {{ $bookings->links() }}
+                            {{ $blogs->links() }}
                         </div>
                     </div>
 

@@ -16,4 +16,6 @@ class BookingController extends Controller
             'message' => "Success, we'll process your booking"
         ]);
     }
+
+    
 }

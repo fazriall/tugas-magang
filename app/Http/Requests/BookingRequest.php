@@ -26,7 +26,7 @@ class BookingRequest extends FormRequest
             'email' => 'required',
             'number_phone' => 'required',
             'date' => ['required', 'date'],
-            'travel_package_id' => 'required',
+            'penginapan_id' => 'required',
         ];
     }
 }

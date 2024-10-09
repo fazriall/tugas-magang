@@ -8,69 +8,80 @@ use App\Models\TravelPackage;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
 use App\Http\Requests\Admin\GalleryRequest;
+use App\Models\Penginapan;
 
 class GalleryController extends Controller
 {
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created resource in storage for Travel Package.
+    
      */
     public function store(GalleryRequest $request, TravelPackage $travel_package)
     {
-        if($request->validated()){
-            $images = $request->file('images')->store(
-                'travel_package/gallery', 'public'
-            );
-            Gallery::create($request->except('images') + ['images' => $images,'travel_package_id' => $travel_package->id]);
-        }
+        // Validasi dan simpan gambar
+        $images = $request->file('images')->store('travel_package/gallery', 'public');
 
-        return redirect()->route('admin.travel_packages.edit', [$travel_package])->with([
-            'message' => 'Success Created !',
+        Gallery::create(array_merge($request->except('images'), [
+            'images' => $images,
+            'travel_package_id' => $travel_package->id
+        ]));
+
+        return redirect()->route('admin.travel_packages.edit', $travel_package->id)->with([
+            'message' => 'Success Created!',
             'alert-type' => 'success'
         ]);
     }
-
+    
     /**
-     * Show the form for editing the specified resource.
+     * Edit for Travel Package.
      */
-    public function edit(TravelPackage $travel_package,Gallery $gallery)
+    public function edit(TravelPackage $travel_package, Gallery $gallery)
     {
-        return view('admin.galleries.edit', compact('travel_package','gallery'));
+        return view('admin.galleries.edit', compact('travel_package', 'gallery'));
     }
 
+
     /**
-     * Update the specified resource in storage.
+     * Update the specified resource in storage for Travel Package.
      */
-    public function update(GalleryRequest $request,TravelPackage $travel_package, Gallery $gallery)
+    public function update(GalleryRequest $request, TravelPackage $travel_package, Gallery $gallery)
     {
-        if($request->validated()) {
-            if($request->images) {
-                File::delete('storage/'. $gallery->images);
-                $images = $request->file('images')->store(
-                    'travel_package/gallery', 'public'
-                );
-                $gallery->update($request->except('images') + ['images' => $images, 'travel_package_id' => $travel_package->id]);
-            }else {
-                $gallery->update($request->validated());
-            }
+        if ($request->hasFile('images')) {
+            // Hapus gambar lama
+            File::delete(public_path('storage/' . $gallery->images));
+
+            // Simpan gambar baru
+            $images = $request->file('images')->store('travel_package/gallery', 'public');
+            $gallery->update(array_merge($request->validated(), [
+                'images' => $images,
+                'travel_package_id' => $travel_package->id
+            ]));
+        } else {
+            $gallery->update($request->validated());
         }
 
-        return redirect()->route('admin.travel_packages.edit', [$travel_package])->with([
-            'message' => 'Success Updated !',
+        return redirect()->route('admin.travel_packages.edit', $travel_package->id)->with([
+            'message' => 'Success Updated!',
             'alert-type' => 'info'
         ]);
     }
 
+   
+
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified resource from storage for Travel Package.
      */
-    public function destroy(TravelPackage $travel_package,Gallery $gallery)
+    public function destroy(TravelPackage $travel_package, Gallery $gallery)
     {
-        File::delete('storage/'. $gallery->images);
+        // Hapus gambar dari storage
+        File::delete(public_path('storage/' . $gallery->images));
         $gallery->delete();
 
         return redirect()->back()->with([
-            'message' => 'Success Deleted !',
+            'message' => 'Success Deleted!',
             'alert-type' => 'danger'
         ]);
     }
-}
+
+    }
+

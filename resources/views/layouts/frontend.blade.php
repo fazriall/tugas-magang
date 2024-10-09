@@ -33,41 +33,38 @@
                         </a>
                     </li>
 
-                    <div class="nav__menu">
+                    <div class="nav__item">
                         <ul class="nav__list">
                             <li class="nav__item">
-                                <a href="{{ route('homepage') }}"
-                                    class="nav__link {{ request()->is('/') ? ' active-link' : '' }}">
-                                    <i class="bx bx-home-alt"></i>
-                                    <span>Market place</span>
+                                <a class="nav__link {{ request()->is('') ? ' active-link' : '' }} cursor-pointer" id="akomodasi-link">
+                                    <i class="bx bx-car"></i>
+                                    <span>Akomodasi</span>
                                 </a>
-                            </li>
-                            <div class="nav__item">
-                                <ul class="nav__list">
-                                    <li class="nav__item">
-                                        <a href="#" class="nav__link {{ request()->is('/') ? ' active-link' : '' }}" id="akomodasi-link">
-                                            <i class="bx bx-award"></i>
-                                            <span>Akomodasi</span>
-                                        </a>
-                                        <!-- Submenu -->
-                                        <ul class="submenu" id="akomodasi-submenu" style="display: none;">
-                                            <li><a href="{{ route('transportasi.index') }}">Transportasi</a></li>
-                                            <li><a href="{{ route('penginapan.index') }}">Penginapan</a></li> 
-                                        </ul>
-                                    </li>
+                                <!-- Submenu -->
+                                <ul class="submenu" id="akomodasi-submenu" style="display: none;">
+                                    <li><a href="{{ route('transportasi.index') }}">Transportasi</a></li>
+                                    <li><a href="{{ route('sewa.index') }}">Penginapan</a></li> 
                                 </ul>
-                            </div>
-                            
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <li class="nav__item">
+                        <a href="{{ route('blog.index') }}" class="nav__link {{ request()->is('blogs') || request()->is('blogs/*')  ? ' active-link' : '' }}">
+                            <i class="bx bx-award"></i>
+                            <span>Blog</span>
+                        </a>
+                    </li>       
                             
                     <li class="nav__item">
                         <a href="{{ route('location.index') }}"
                             class="nav__link {{ request()->is('locations') || request()->is('locations/*') ? ' active-link' : '' }}">
-                            <i class="bx bx-award"></i>
+                            <i class="bx bx-map-pin"></i>
                             <span>Destinasi</span>
                         </a>
                         <li class="nav__item">
-                            <a href="{{ route('location.index') }}"
-                                class="nav__link {{ request()->is('locations') || request()->is('locations/*') ? ' active-link' : '' }}">
+                            <a href="{{ route('homepage') }}"
+                            class="nav__link {{ request()->is('') ? ' active-link' : '' }}">
                                 <i class="bx bx-award"></i>
                                 <span>Event</span>
                             </a>   
@@ -125,6 +122,7 @@
                     <h3 class="footer__title">Dinas</h3>
 
                     <ul class="footer__links">
+                        
                         <li>
                             <a href="#" class="footer__link">H
                             </a>
